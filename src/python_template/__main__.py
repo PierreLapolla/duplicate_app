@@ -25,7 +25,7 @@ def scan_system(allowed_extensions: List[str]) -> List[FileData]:
 
     for root, _, files in tqdm(
         os.walk(root, followlinks=False),
-        desc="Scanning system (and filtering invalid extensions)",
+        desc="Scan système (et filtrage des extensions autorisées)",
         mininterval=0.25,
     ):
         for file in files:
@@ -50,7 +50,7 @@ def filter_alone_files(
 ) -> List[FileData]:
     groups = defaultdict(list)
     for file in tqdm(
-        files, desc=f"Filtering files by {grouping_attribute}", mininterval=0.25
+        files, desc=f"Filtrage par {grouping_attribute}", mininterval=0.25
     ):
         groups[getattr(file, grouping_attribute)].append(file)
     for key, group in list(groups.items()):
@@ -61,7 +61,7 @@ def filter_alone_files(
 
 def compute_hashes(files: List[FileData], block_size: int = -1) -> List[FileData]:
     description = (
-        "Computing full hashes" if block_size == -1 else "Computing partial hashes"
+        "Calcul des hash complets" if block_size == -1 else "Calcul des hash partiels"
     )
     for file in tqdm(files, desc=description, mininterval=0.25):
         try:
@@ -76,6 +76,8 @@ def compute_hashes(files: List[FileData], block_size: int = -1) -> List[FileData
 
 @timer
 def main() -> None:
+    # config = get_user_configuration()
+
     fast_search = True
     allowed_extensions = [
         "txt",
@@ -112,3 +114,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    input("Press any key to exit...")
+    # TODO: add command line options

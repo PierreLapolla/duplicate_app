@@ -24,6 +24,12 @@ To run the project locally, run the following command:
   uv run python -m src.python_template
 ```
 
+## Compiling to .exe
+
+```bash
+  pyinstaller --onefile --name=duplicate_finder .\src\python_template\__main__.py
+```
+
 ## Tests, linting and formatting - AUTOMATED
 
 These steps are automatically handled by [pre-commit](https://pre-commit.com/) hooks defined
